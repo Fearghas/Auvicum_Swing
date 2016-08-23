@@ -2,10 +2,11 @@
 /**
  * Created by Andreas on 25.07.2016.
  */
+
+
 public class Patient {
     private String ID;
     private String ANF_DATUM;
-    private String ANF_DETAILS;
     private String ANF_EREIGNIS_DATUM;
     private String ANF_GEPRUEFT_JN;
     private String ARBEITSPLATZ;
@@ -23,16 +24,14 @@ public class Patient {
     private String GEGENLESE_DATUM;
     private String BEFUND_FREIGABE;
 
-    public Patient(String ID,  String ANF_DATUM, String ANF_DETAILS, String ANF_EREIGNIS_DATUM, String ANF_GEPRUEFT_JN,
+    public Patient(String ID, String ANF_DATUM, String ANF_EREIGNIS_DATUM, String ANF_GEPRUEFT_JN,
                    String ARBEITSPLATZ, String ANF_PRUEFDATUM,
                    String BEREICH_SCHLUESSEL, String UNTERS_NAME, String ANMELDUNG_ANKUNFT,
                    String DATUM_TERMIN_VERGABE, String UNTERS_BEGINN, String UNTERS_ENDE,
                    String UNTERS_ART, String BEFUND_DATUM, String DIKTAT_DATUM, String LESE_DATUM,
-                   String GEGENLESE_DATUM, String BEFUND_FREIGABE)
-    {
+                   String GEGENLESE_DATUM, String BEFUND_FREIGABE) {
         this.ID = ID;
         this.ANF_DATUM = ANF_DATUM;
-        this.ANF_DETAILS = ANF_DETAILS;
         this.ANF_EREIGNIS_DATUM = ANF_EREIGNIS_DATUM;
         this.ANF_GEPRUEFT_JN = ANF_GEPRUEFT_JN;
         this.ARBEITSPLATZ = ARBEITSPLATZ;
@@ -51,13 +50,15 @@ public class Patient {
         this.BEFUND_FREIGABE = BEFUND_FREIGABE;
     }
 
-    /**public int getID() {
-        return ID;
-    }
-
-    public void setID(int ID) {
-        this.ID = ID;
-    }**/
+    /**
+     * public int getID() {
+     * return ID;
+     * }
+     * <p>
+     * public void setID(int ID) {
+     * this.ID = ID;
+     * }
+     **/
 
     public String getANF_DATUM() {
         return ANF_DATUM;
@@ -65,14 +66,6 @@ public class Patient {
 
     public void setANF_DATUM(String ANF_DATUM) {
         this.ANF_DATUM = ANF_DATUM;
-    }
-
-    public String getANF_DETAILS() {
-        return ANF_DETAILS;
-    }
-
-    public void setANF_DETAILS(String ANF_DETAILS) {
-        this.ANF_DETAILS = ANF_DETAILS;
     }
 
     public String getANF_GEPRUEFT_JN() {
