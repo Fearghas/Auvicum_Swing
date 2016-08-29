@@ -1,3 +1,5 @@
+import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.*;
 import java.util.ArrayList;
 
@@ -5,15 +7,31 @@ import java.util.ArrayList;
  * Created by Andreas on 15.06.2016.
  */
 
-public class main {
-    public static void main(String[] args) {
-        String csvFile = "C:\\Users\\Andreas\\Desktop\\muster.csv";
-        BufferedReader bufferedReader = null;
-        String line = null;
-        String csvSplitBy = ";";
-        ArrayList<Patient> patientList = new ArrayList<>();
+public class main
+{
+    public static void main(String[] args) throws IOException
+    {
+        //create file chooser
+        final JFileChooser chooser = new JFileChooser("C:\\Users\\Briareus\\IdeaProjects\\AuvicumTest2\\src\\");
+        //filechooser shows file with *.csv ending
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("*.csv", "csv");
+        chooser.setFileFilter(filter);
+        int returnValue = chooser.showOpenDialog(null);
+        //action to perform with approve
+        String csvFile = null;
+        if(returnValue == JFileChooser.APPROVE_OPTION)
+        {
+            // use file
+             csvFile = chooser.getSelectedFile().getPath();
+            //Methode für einlesen und weitere Verarbeitung einbauen
+        }
+        Data FileToHandle = new Data(csvFile);
+        FileToHandle.storeContent();
 
-        try {
+
+        //System.out.println(FileToHandle.patientList.get(0).getDATUM_TERMIN_VERGABE());
+        //String csvFile = "C:\\Users\\Briareus\\IdeaProjects\\AuvicumTest2\\src\\muster.csv";
+        /*try {
             bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(csvFile)));
             {
                 //bufferedReader = new BufferedReader(new FileReader(csvFile)); //Datei schon als UTF-8 gespeichert
@@ -27,7 +45,6 @@ public class main {
 
                 // use comma as separator
                 String[] lineSplitted = line.split(csvSplitBy, -1);
-
                 //int idParsed = Integer.parseInt(lineSplitted[0]);
                 //System.out.println(lineSplitted[0]);
                 Patient patient = new Patient(lineSplitted[0], lineSplitted[1], lineSplitted[2], lineSplitted[3],
@@ -47,8 +64,6 @@ public class main {
                 bufferedReader.close(); // close bufferreader
             } catch (IOException e) {
                 e.printStackTrace();
-            }
-        }
-
+            }*/
     }
 }
