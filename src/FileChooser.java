@@ -12,6 +12,9 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -26,9 +29,15 @@ import javafx.stage.Stage;
             stage.setTitle("File Chooser Sample");
 
             final javafx.stage.FileChooser fileChooser = new javafx.stage.FileChooser();
-
             final Button openButton = new Button("Open a Picture...");
             final Button openMultipleButton = new Button("Open Pictures...");
+            final MenuBar menuBar = new MenuBar();
+            final Menu menuFile = new Menu("File");
+            final Menu menuEdit = new Menu("Edit");
+            final MenuItem menuItem = new MenuItem("Open");
+
+            menuFile.getItems().add(menuItem); //Hier ActionListener für DropdownMenü hinterlegen
+            menuBar.getMenus().addAll(menuFile, menuEdit);
 
             openButton.setOnAction(
                     (javafx.event.ActionEvent e) -> {
@@ -49,18 +58,18 @@ import javafx.stage.Stage;
                         }
                     });
 
+            final GridPane inputGridPane = new GridPane(); // GridPane = Raster zur Orientierung v. Objekten
 
-            final GridPane inputGridPane = new GridPane();
+            GridPane.setConstraints(openButton, 0, 1);
+            GridPane.setConstraints(openMultipleButton, 1, 1);
+            GridPane.setConstraints(menuBar, 0, 0);
+            inputGridPane.setHgap(20);
+            inputGridPane.setVgap(10);
+            inputGridPane.getChildren().addAll(openButton, openMultipleButton, menuBar);
 
-            GridPane.setConstraints(openButton, 0, 0);
-            GridPane.setConstraints(openMultipleButton, 1, 0);
-            inputGridPane.setHgap(6);
-            inputGridPane.setVgap(6);
-            inputGridPane.getChildren().addAll(openButton, openMultipleButton);
-
-            final Pane rootGroup = new VBox(12);
+            final Pane rootGroup = new VBox(15);
             rootGroup.getChildren().addAll(inputGridPane);
-            rootGroup.setPadding(new Insets(12, 12, 12, 12));
+            rootGroup.setPadding(new Insets(20, 20, 20, 20));
 
             stage.setScene(new Scene(rootGroup));
             stage.show();
