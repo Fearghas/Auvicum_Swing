@@ -26,6 +26,9 @@ public class main
             //Methode für einlesen und weitere Verarbeitung einbauen
         }
         Data FileToHandle = new Data(csvFile);
-        FileToHandle.storeContent();
+        Patient patient = new Patient(FileToHandle.storeContent());
+        patient.getPatientID(FileToHandle);
+
+
     }
 }

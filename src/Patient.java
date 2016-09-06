@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -7,12 +8,22 @@ import java.util.ArrayList;
 
 public class Patient
 {
-    ArrayList<String> content;
+    private String[][] data;
+    private Data test;
 
-    public Patient(ArrayList content)
+    public Patient(String[][] data)
     {
-        this.content = content;
+        this.data = data;
     }
 
+    public void getPatientID(Data test)
+    {
 
+        for (int i = 0; i < test.getLineCounter(); i++)
+        {
+            String result = data[i][0];
+            System.out.println(result);
+        }
+    }
 }
+

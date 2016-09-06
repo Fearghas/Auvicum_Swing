@@ -6,11 +6,9 @@ import java.util.ArrayList;
  */
 public class Data
 {
-    private Patient patient;
+
     private String file;
-    private FileInputStream inputStream;
-    int count;
-    String[] header;
+    private int lineCounter;
 
     public Data(String file)
     {
@@ -18,15 +16,15 @@ public class Data
     }
 
     //Methode zum Anzahl Columns berechnen
-    public void storeContent() throws IOException
+    public String[][] storeContent() throws IOException
     {
         FileInputStream inputStream = new FileInputStream(file);
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
         String csvSplitBy = ";";
         String headerLine = bufferedReader.readLine();
         String[] header = headerLine.split(csvSplitBy);
-        count = header.length;
-        int lineCounter = 1; //weil Headerlinie noch dazuzählen
+        int count = header.length;
+        lineCounter = 1; //weil Headerlinie noch dazuzählen
         int indexOfHeaderElements = 0;
         while (bufferedReader.readLine() != null)
         {
@@ -52,7 +50,13 @@ public class Data
             }
             y++;
         }
-        System.out.println(multiDimensional[30][0]);
+        //System.out.println(multiDimensional[7532][1]);
         bufferedReader.close();
+        return multiDimensional;
+    }
+
+    public int getLineCounter()
+    {
+        return lineCounter;
     }
 }
