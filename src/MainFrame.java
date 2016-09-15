@@ -20,7 +20,7 @@ public class MainFrame
         //Hauptframe erstellen
         JFrame mainFrame = new JFrame("Auvicum");
 
-        //Panel für Hauptframe
+        //Panel für Hauptframe erstellen
         Panel firstPanel = new Panel();
         firstPanel.setLayout(new FlowLayout());
 
