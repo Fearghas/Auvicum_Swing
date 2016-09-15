@@ -10,12 +10,13 @@ public class Data
     private String file;
     private int lineCounter;
 
+
     public Data(String file)
     {
         this.file = file;
     }
 
-    //Methode zum Anzahl Columns berechnen
+    //Methode zum Anzahl Columns berechnen und liefert String[][] zurück
     public String[][] storeContent() throws IOException
     {
         FileInputStream inputStream = new FileInputStream(file);
@@ -24,7 +25,7 @@ public class Data
         String headerLine = bufferedReader.readLine();
         String[] header = headerLine.split(csvSplitBy);
         int count = header.length;
-        lineCounter = 1; //weil Headerlinie noch dazuzählen
+        lineCounter = 1; // Headerlinie noch dazuzählen
         int indexOfHeaderElements = 0;
         while (bufferedReader.readLine() != null)
         {
