@@ -3,6 +3,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 /**
  * Created by Briareus on 13.09.2016.
@@ -23,11 +25,14 @@ public class MainFrame
         //Panel für Hauptframe erstellen
         Panel firstPanel = new Panel();
         firstPanel.setLayout(new FlowLayout());
+        String comboBoxListe [] = {"Jahr", "Monat", "Gerätename"};
+
 
         //Eigenschaften für Panel
         label = new JLabel("Choose a *.csv file");
         JButton button = new JButton();
         button.setText("Browse");
+        JComboBox filterList = new JComboBox(comboBoxListe);
         button.addActionListener(new ActionListener()
         {
             @Override
@@ -39,6 +44,30 @@ public class MainFrame
 
         firstPanel.add(label);
         firstPanel.add(button);
+        firstPanel.add(filterList);
+
+        ActionListener filterListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String s =(String) filterList.getSelectedItem();
+                switch(s) { //check for match
+                    case "Jahr":
+                        System.out.println("Jahr");
+                        //Code für Filter Jahr
+                        break;
+                    case "Monat":
+                        System.out.println("Monat");
+                        //Code für Filter Monat
+                        break;
+                    case "Gerätename":
+                        System.out.println("Gerätename");
+                        //Code für Filter Gerätename
+                        break;
+                    default:
+                        System.out.println("No match");
+                }}
+        };
+        filterList.addActionListener(filterListener);
 
         mainFrame.add(firstPanel);
         mainFrame.setSize(300, 300);
@@ -51,7 +80,7 @@ public class MainFrame
     //alle Methoden dieser Klasse
     private void getPath() {
         //JFileChooser erstellen in dem nur *.csv angezeigt wird
-        JFileChooser chooser = new JFileChooser();
+        JFileChooser chooser = new JFileChooser("C:\\Users\\Andreas\\IdeaProjects\\Auvicum_Swing\\src");
         FileNameExtensionFilter filter = new FileNameExtensionFilter("*.csv", "csv");
         chooser.setFileFilter(filter);
         int returnValue = chooser.showOpenDialog(null);
