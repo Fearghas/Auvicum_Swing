@@ -3,16 +3,15 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 
 /**
  * Created by Briareus on 13.09.2016.
  */
-public class MainFrame
+public class MainFrame extends JPanel
 {
     private String csvFile = null;
     private JLabel label;
+    private JLabel labelTwo;
     private boolean fileChosen = false;
 
     public MainFrame() {} //Konstruktor generisch
@@ -24,15 +23,14 @@ public class MainFrame
 
         //Panel für Hauptframe erstellen
         Panel firstPanel = new Panel();
-        firstPanel.setLayout(new FlowLayout());
-        String comboBoxListe [] = {"Jahr", "Monat", "Gerätename"};
-
+        //setLayout mit BoxLayout/BorderLayout/GridLayout für Standort der Panels zu organisieren
+        firstPanel.setLayout(new BoxLayout(firstPanel, BoxLayout.Y_AXIS));
 
         //Eigenschaften für Panel
         label = new JLabel("Choose a *.csv file");
+        labelTwo = new JLabel("Draw Image - creates a new frame");
         JButton button = new JButton();
         button.setText("Browse");
-        JComboBox filterList = new JComboBox(comboBoxListe);
         button.addActionListener(new ActionListener()
         {
             @Override
@@ -41,39 +39,57 @@ public class MainFrame
                 getPath();
             }
         });
+        JButton buttonDraw = new JButton();
+        buttonDraw.setText("Draw Image");
+        buttonDraw.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                JFrame frame = new JFrame("TimerBasedAnimation");
+                frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                frame.add(new Animation());
+                frame.setSize(450, 350);
+                frame.setLocationRelativeTo(null);
+                frame.setVisible(true);
+                /*drawing.add(new JPanel()
+                {
+                    @Override
+                    protected void paintComponent(Graphics g)
+                    {
+                        super.paintComponent(g);
+                        setBackground(Color.GREEN);
+                        g.drawRect(10, 10, 50, 50);
+                    }
+                }, BorderLayout.CENTER);
+                drawing.setLocationRelativeTo(null);
+                drawing.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                drawing.setVisible(true);*/
+            }
+        });
 
         firstPanel.add(label);
         firstPanel.add(button);
-        firstPanel.add(filterList);
+        firstPanel.add(labelTwo);
+        firstPanel.add(buttonDraw);
 
-        ActionListener filterListener = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String s =(String) filterList.getSelectedItem();
-                switch(s) { //check for match
-                    case "Jahr":
-                        System.out.println("Jahr");
-                        //Code für Filter Jahr
-                        break;
-                    case "Monat":
-                        System.out.println("Monat");
-                        //Code für Filter Monat
-                        break;
-                    case "Gerätename":
-                        System.out.println("Gerätename");
-                        //Code für Filter Gerätename
-                        break;
-                    default:
-                        System.out.println("No match");
-                }}
-        };
-        filterList.addActionListener(filterListener);
-
-        mainFrame.add(firstPanel);
-        mainFrame.setSize(300, 300);
+        mainFrame.getContentPane().add(firstPanel);
+        mainFrame.setSize(500, 500);
         mainFrame.setLocationRelativeTo(null);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setVisible(true);
+
+    }
+
+    @Override
+    public void paintComponent(Graphics graphics)
+    {
+        super.paintComponent(graphics);
+        Graphics2D g2d = (Graphics2D) graphics.create();
+        // This could actually be achieved using a EmptyBorder and a LineBorder
+        // but this demonstrates the point...
+        g2d.setColor(Color.RED);
+        g2d.drawRect(10, 10, getWidth() - 20, getHeight() - 20);
+        g2d.dispose();
 
     }
 

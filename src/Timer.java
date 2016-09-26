@@ -1,12 +1,12 @@
 /**
  * Created by Briareus on 05.09.2016.
  */
-public class Filter
+public class Timer
 {
     private Patient list;
     private String[][] data;
 
-    public Filter(Patient list)
+    public Timer(Patient list)
     {
         this.list = list;
     }

@@ -2,6 +2,7 @@ import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.*;
 import java.util.ArrayList;
+import java.awt.Graphics;
 
 /**
  * Created by Andreas on 15.06.2016.
