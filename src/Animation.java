@@ -24,8 +24,20 @@ public class Animation extends JPanel implements ActionListener {
     public Animation(String[][] list)
     {
         this.list = list;
-        System.out.println(list.length);
-        setXY( Math.random(), 200, 200);//Math.random = size => ersetzen und Zugriff auf Data erstellen!
+        //System.out.println(list.length);
+       /*int counter = 0;
+        for (int i = 0; i < list.length; i++)
+        {
+            if (list[i][1].contains("2016"))
+            {
+                counter++;
+            }
+        }
+        System.out.println(counter);*/
+        double random = Math.random();
+        System.out.println("Random: " + random);
+        setXY( random, 200, 200);//Math.random = size => ersetzen und Zugriff auf Data erstellen!
+        //setXY(counter, 200, 200);
         timer = new Timer(40, this); //"50" setzt Geschwindigkeit der Animation, wie schnell wird neugezeichnet
         timer.setInitialDelay(190);
         timer.start();
@@ -34,6 +46,7 @@ public class Animation extends JPanel implements ActionListener {
 
     public void setXY(double size, int w, int h) //Ellipsen Grösse und Anfangsposition bestimmen
     {
+        System.out.println("Size in setXY Methode: " + size);
         esize = size;
         ellipse.setFrame(50, 50, size, size); //Frame anhand der Anfangsgrösse setzen?
 
