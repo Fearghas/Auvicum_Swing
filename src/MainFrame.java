@@ -13,7 +13,8 @@ public class MainFrame extends JPanel
     private JLabel label;
     private JLabel labelTwo;
     private boolean fileChosen = false;
-    private Data data;
+    //private Data data;
+    private String [][] list;
 
     public MainFrame() {} //Konstruktor generisch
 
@@ -49,7 +50,7 @@ public class MainFrame extends JPanel
             {
                 JFrame frame = new JFrame("TimerBasedAnimation");
                 frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                frame.add(new Animation(getData()));
+                frame.add(new Animation(getList()));
                 frame.setSize(450, 350);
                 frame.setLocationRelativeTo(null);
                 frame.setVisible(true);
@@ -142,15 +143,15 @@ public class MainFrame extends JPanel
         }
     }
 
-    public void setData(Data data)
+    public void setList(String[][] list)
     {
-        this.data = data;
+        this.list = list;
     }
 
-    public Data getData()
+    public String[][] getList()
     {
 
-        return data;
+        return list;
     }
 }
 

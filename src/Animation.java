@@ -16,15 +16,15 @@ public class Animation extends JPanel implements ActionListener {
     private double esize;
     private double maxSize = 0;
     private boolean initialize = true;
-    Timer timer;
-    private Data data;
+    private Timer timer;
+    private String[][] list;
 
 
 
-    public Animation(Data data)
+    public Animation(String[][] list)
     {
-        this.data = data;
-        System.out.println(data.getLineCounter());
+        this.list = list;
+        System.out.println(list.length);
         setXY( Math.random(), 200, 200);//Math.random = size => ersetzen und Zugriff auf Data erstellen!
         timer = new Timer(40, this); //"50" setzt Geschwindigkeit der Animation, wie schnell wird neugezeichnet
         timer.setInitialDelay(190);

@@ -17,7 +17,7 @@ public class Data
     }
 
     //Methode zum Anzahl Columns berechnen und liefert String[][] zurück
-    public Data storeContent() throws IOException
+    public String[][] storeContent() throws IOException
     {
         FileInputStream inputStream = new FileInputStream(file);
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
@@ -53,7 +53,7 @@ public class Data
         }
         //System.out.println(array2D[7532][1]);
         bufferedReader.close();
-        return this;
+        return array2D ;
     }
 
     public int getLineCounter()

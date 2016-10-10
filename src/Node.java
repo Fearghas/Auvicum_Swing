@@ -12,7 +12,7 @@ public class Node
         mainFrame.createMainFrame();
         mainFrame.waitingForUser(); //Barriere => warten bis File ausgesucht wurde, dann gehts weiter mit Anweisungen unten
         Data csvFile = new Data(mainFrame.getCsvFile());
-        mainFrame.setData(csvFile.storeContent());
+        mainFrame.setList(csvFile.storeContent());
 
     }
 }
