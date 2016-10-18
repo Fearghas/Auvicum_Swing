@@ -16,36 +16,40 @@ public class Animation extends JPanel implements ActionListener {
     private double esize;
     private double maxSize = 0;
     private boolean initialize = true;
-    Timer timer;
-    ActionListener updateProBar;
-    private String[][] data;
-    private Data test;
-    private Patient patient;
+    private Timer timer;
+    private String[][] list;
 
-    public Animation() {
-        setXY( Math.random(), 200, 200);
+
+
+    public Animation(String[][] list)
+    {
+        this.list = list;
+        //System.out.println(list.length);
+       /*int counter = 0;
+        for (int i = 0; i < list.length; i++)
+        {
+            if (list[i][1].contains("2016"))
+            {
+                counter++;
+            }
+        }
+        System.out.println(counter);*/
+        double random = Math.random();
+        System.out.println("Random: " + random);
+        setXY( random, 200, 200);//Math.random = size => ersetzen und Zugriff auf Data erstellen!
+        //setXY(counter, 200, 200);
         timer = new Timer(40, this); //"50" setzt Geschwindigkeit der Animation, wie schnell wird neugezeichnet
         timer.setInitialDelay(190);
         timer.start();
     }
 
-    public Animation(Patient patient){ //Konstruktor für Patient Klasse
-        this.patient=patient;
-    }
-    public Patient getPatient(){
-        return patient;
-    }
 
-
-    public void setXY(double size, int w, int h) {
+    public void setXY(double size, int w, int h) //Ellipsen Grösse und Anfangsposition bestimmen
+    {
+        System.out.println("Size in setXY Methode: " + size);
         esize = size;
-        ellipse.setFrame(50, 50, size, size); //Position der Animation
+        ellipse.setFrame(50, 50, size, size); //Frame anhand der Anfangsgrösse setzen?
 
-    }
-
-    public void getXY(Patient patient){
-        patient.getPatientID(test);
-        System.out.println(test.getLineCounter());
     }
 
     public void reset(int w, int h) { //methode reset wird im drawing genutzt
@@ -60,8 +64,6 @@ public class Animation extends JPanel implements ActionListener {
             ellipse.setFrame(ellipse.getX(), ellipse.getY(), esize, esize);
         }
     }
-
-
 
     public void render(int w, int h, Graphics2D g2) {
         g2.setColor(Color.GREEN);
@@ -85,7 +87,9 @@ public class Animation extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         repaint();
     }
-    public static void main(String[] args) {
+
+
+    /*public static void main(String[] args) {
 
         JFrame frame = new JFrame("TimerBasedAnimation");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -93,5 +97,5 @@ public class Animation extends JPanel implements ActionListener {
         frame.setSize(450, 350);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-    }
+    }*/
 }

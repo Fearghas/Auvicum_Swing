@@ -31,10 +31,10 @@ public class Data
         {
             lineCounter++;
         }
-        String[][] multiDimensional = new String[lineCounter][count];
+        String[][] list = new String[lineCounter][count];
         for (int i = 0; i < count; i++)
         {
-            multiDimensional[indexOfHeaderElements][i] = header[i];
+            list[indexOfHeaderElements][i] = header[i];
         }
         inputStream.getChannel().position(0); //BufferedReader springt zurück zum Textanfang
         //System.out.println("x-Achse: " + count + " " + "y-Achse: " + lineCounter);
@@ -47,13 +47,13 @@ public class Data
             String[] content = lineAfterHeader.split(csvSplitBy, -1); //String mit 17 Elementen
             for (int x = 0; x < count; x++)
             {
-                multiDimensional[y][x] = content[x];
+                list[y][x] = content[x];
             }
             y++;
         }
-        //System.out.println(multiDimensional[7532][1]);
+        //System.out.println(array2D[7532][1]);
         bufferedReader.close();
-        return multiDimensional;
+        return list ;
     }
 
     public int getLineCounter()

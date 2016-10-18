@@ -13,6 +13,8 @@ public class MainFrame extends JPanel
     private JLabel label;
     private JLabel labelTwo;
     private boolean fileChosen = false;
+    //private Data data;
+    private String [][] list;
 
     public MainFrame() {} //Konstruktor generisch
 
@@ -41,13 +43,14 @@ public class MainFrame extends JPanel
         });
         JButton buttonDraw = new JButton();
         buttonDraw.setText("Draw Image");
-        buttonDraw.addActionListener(new ActionListener() {
+        buttonDraw.addActionListener(new ActionListener()
+        {
             @Override
             public void actionPerformed(ActionEvent e)
             {
                 JFrame frame = new JFrame("TimerBasedAnimation");
                 frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                frame.add(new Animation());
+                frame.add(new Animation(getList()));
                 frame.setSize(450, 350);
                 frame.setLocationRelativeTo(null);
                 frame.setVisible(true);
@@ -77,19 +80,6 @@ public class MainFrame extends JPanel
         mainFrame.setLocationRelativeTo(null);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setVisible(true);
-
-    }
-
-    @Override
-    public void paintComponent(Graphics graphics)
-    {
-        super.paintComponent(graphics);
-        Graphics2D g2d = (Graphics2D) graphics.create();
-        // This could actually be achieved using a EmptyBorder and a LineBorder
-        // but this demonstrates the point...
-        g2d.setColor(Color.RED);
-        g2d.drawRect(10, 10, getWidth() - 20, getHeight() - 20);
-        g2d.dispose();
 
     }
 
@@ -130,7 +120,7 @@ public class MainFrame extends JPanel
     {
         synchronized (this)
         {
-            while (!fileChosen) //!fileChosen negiert wird hier zu "true"
+            while (!fileChosen) //!fileChosen negiert, wird hier zu "true"
             {
                 try
                 {
@@ -151,6 +141,17 @@ public class MainFrame extends JPanel
             fileChosen = true;
             this.notifyAll();
         }
+    }
+
+    public void setList(String[][] list)
+    {
+        this.list = list;
+    }
+
+    public String[][] getList()
+    {
+
+        return list;
     }
 }
 
