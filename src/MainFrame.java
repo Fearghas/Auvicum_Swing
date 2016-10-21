@@ -13,25 +13,33 @@ public class MainFrame extends JPanel
     private JLabel label;
     private JLabel labelTwo;
     private boolean fileChosen = false;
-    //private Data data;
     private String [][] list;
+    private Animation circles;
+    private MainFrame mainFrame;
+    private ButtonPanelPlayStop buttonPanelPlayStop;
+    private JButton stopButton;
+    private JButton buttonDraw;
+    private JButton button;
+    private Panel firstPanel;
+    private JButton playButton;
 
-    public MainFrame() {} //Konstruktor generisch
+    public MainFrame(){}
 
     public void createMainFrame()
     {
         //Hauptframe erstellen
         JFrame mainFrame = new JFrame("Auvicum");
-
         //Panel für Hauptframe erstellen
-        Panel firstPanel = new Panel();
-        //setLayout mit BoxLayout/BorderLayout/GridLayout für Standort der Panels zu organisieren
-        firstPanel.setLayout(new BoxLayout(firstPanel, BoxLayout.Y_AXIS));
+        buttonPanelPlayStop=new ButtonPanelPlayStop();
+        firstPanel = new Panel();
+        //setLayout mit BoxLayout/BorderLayout/GridLayout für Standort der Panels zu organisiere
+        firstPanel.setLayout(new GridLayout(0,1));
+
 
         //Eigenschaften für Panel
         label = new JLabel("Choose a *.csv file");
         labelTwo = new JLabel("Draw Image - creates a new frame");
-        JButton button = new JButton();
+        button = new JButton();
         button.setText("Browse");
         button.addActionListener(new ActionListener()
         {
@@ -41,8 +49,9 @@ public class MainFrame extends JPanel
                 getPath();
             }
         });
-        JButton buttonDraw = new JButton();
-        buttonDraw.setText("Draw Image");
+        buttonDraw = new JButton();
+        buttonDraw.setText("Draw");
+
         buttonDraw.addActionListener(new ActionListener()
         {
             @Override
@@ -50,30 +59,40 @@ public class MainFrame extends JPanel
             {
                 JFrame frame = new JFrame("TimerBasedAnimation");
                 frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                frame.add(new Animation(getList()));
+                MainFrame.this.circles = new Animation(getList());
+                frame.add(circles);
                 frame.setSize(450, 350);
                 frame.setLocationRelativeTo(null);
                 frame.setVisible(true);
-                /*drawing.add(new JPanel()
-                {
-                    @Override
-                    protected void paintComponent(Graphics g)
-                    {
-                        super.paintComponent(g);
-                        setBackground(Color.GREEN);
-                        g.drawRect(10, 10, 50, 50);
-                    }
-                }, BorderLayout.CENTER);
-                drawing.setLocationRelativeTo(null);
-                drawing.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                drawing.setVisible(true);*/
             }
         });
 
+        stopButton = new JButton();
+        stopButton.setText("Stop");
+        stopButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                circles.stopTimer();
+            }
+        });
+
+        playButton=new JButton();
+        playButton.setText("Play");
+
+        playButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                circles.startTimer();
+            }
+        });
         firstPanel.add(label);
         firstPanel.add(button);
         firstPanel.add(labelTwo);
         firstPanel.add(buttonDraw);
+        firstPanel.add(stopButton);
+        firstPanel.add(playButton);
+
+
 
         mainFrame.getContentPane().add(firstPanel);
         mainFrame.setSize(500, 500);
@@ -142,16 +161,22 @@ public class MainFrame extends JPanel
             this.notifyAll();
         }
     }
+    public Animation getAnimation()
+    {
+    return circles;
+    }
+
+    public String[][] getList()
+    {
+        return list;
+    }
 
     public void setList(String[][] list)
     {
         this.list = list;
     }
 
-    public String[][] getList()
-    {
-
-        return list;
+    public ButtonPanelPlayStop getButtonPanelPlayStop() {
+        return this.buttonPanelPlayStop;
     }
 }
-
