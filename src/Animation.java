@@ -6,6 +6,10 @@ import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.Ellipse2D;
+import java.io.File;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -34,14 +38,6 @@ public class Animation extends JPanel implements ActionListener {
         timer.start();
     }
 
-    public Timer getTimer() {
-        return this.timer;
-    }
-
-    public void setTimer(Timer timer) {
-        this.timer = timer;
-    }
-
     public void setXY(double size, int w, int h) //Ellipsen Grösse und Anfangsposition bestimmen
     {
         ellipseSize = size;
@@ -51,7 +47,6 @@ public class Animation extends JPanel implements ActionListener {
         ellipse3.setFrame(160,60,size,size);
         ellipse4.setFrame(155,55,size,size);
         ellipse5.setFrame(200,30,size,size);
-
 
     }
 
@@ -63,6 +58,7 @@ public class Animation extends JPanel implements ActionListener {
         ellipseSize++;
         if (ellipseSize > maxSize) {
             setXY(1, w, h);
+            playSound();
         } else {
             ellipse.setFrame(ellipse.getX(), ellipse.getY(), ellipseSize, ellipseSize);//Sets the location and size of the framing rectangle of this Shape to the specified rectangular values.
             ellipse1.setFrame(ellipse1.getX(), ellipse1.getY(), ellipseSize, ellipseSize);
@@ -101,7 +97,17 @@ public class Animation extends JPanel implements ActionListener {
         this.step(size.width, size.height);
         render(size.width, size.height, g2);
     }
-
+    public void playSound(){
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("C:\\Users\\Andreas\\harp.wav").getAbsoluteFile());
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch (Exception ex) {
+            System.out.println("Error with playing sound.");
+            ex.printStackTrace();
+        }
+    }
     public void actionPerformed(ActionEvent e) {
         repaint();
     }
