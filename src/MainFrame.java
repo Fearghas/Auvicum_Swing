@@ -161,10 +161,6 @@ public class MainFrame extends JPanel
             this.notifyAll();
         }
     }
-    public Animation getAnimation()
-    {
-    return circles;
-    }
 
     public String[][] getList()
     {
@@ -176,7 +172,4 @@ public class MainFrame extends JPanel
         this.list = list;
     }
 
-    public ButtonPanelPlayStop getButtonPanelPlayStop() {
-        return this.buttonPanelPlayStop;
-    }
 }
