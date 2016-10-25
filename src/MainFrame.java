@@ -16,7 +16,6 @@ public class MainFrame extends JPanel
     private String [][] list;
     private Animation circles;
     private MainFrame mainFrame;
-    private ButtonPanelPlayStop buttonPanelPlayStop;
     private JButton stopButton;
     private JButton buttonDraw;
     private JButton button;
@@ -30,7 +29,6 @@ public class MainFrame extends JPanel
         //Hauptframe erstellen
         JFrame mainFrame = new JFrame("Auvicum");
         //Panel für Hauptframe erstellen
-        buttonPanelPlayStop=new ButtonPanelPlayStop();
         firstPanel = new Panel();
         //setLayout mit BoxLayout/BorderLayout/GridLayout für Standort der Panels zu organisiere
         firstPanel.setLayout(new GridLayout(0,1));
