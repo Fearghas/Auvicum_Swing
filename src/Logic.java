@@ -1,71 +1,85 @@
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 
 /**
- * Created by Briareus on 11.10.2016.
+ * Created by Briareus on 18.10.2016.
  */
 public class Logic
 {
-    private String[][] list;
+    private Data data;
+    private Integer[] frequencyArray;
+    private ArrayList<Date> columnAnfrageDatum;
+    private ArrayList<Date> columnTerminvergabe;
+    private ArrayList<Date> columnAnmeldungAnkunft;
+    private ArrayList<Date> columnUntersuchungsbeginn;
+    private ArrayList<Date> columnBefund;
+    private ArrayList<Date> columnBefundfreigabe;
+    private SimpleDateFormat newFormat;
+    private Date startDate;
 
-
-    public Logic(String[][] list) throws ParseException
+    public Logic(Data data) throws ParseException
     {
-        this.list = list;
+        this.data = data;
+        columnAnfrageDatum = data.createArrayListDates(1);
+        columnTerminvergabe = data.createArrayListDates(9);
+        columnAnmeldungAnkunft = data.createArrayListDates(8);
+        columnUntersuchungsbeginn = data.createArrayListDates(10);
+        columnBefund = data.createArrayListDates(13);
+        columnBefundfreigabe = data.createArrayListDates(17);
+        newFormat = new SimpleDateFormat("dd.MM.yyyy");
+        startDate = newFormat.parse(new String("01.12.2015"));
+        frequencyArray = new Integer[6];
+        //Date startDate = newFormat.parse(String.valueOf(list[1][1]));
+        //String testDate = new String("31.12.2016");
+        //Date endDate = newFormat.parse(testDate);
+        //Start date und enddate im Kalender
     }
 
-    public void useLogic() throws ParseException
+    public Integer[] countFrequency()
     {
-        SimpleDateFormat newFormat = new SimpleDateFormat("dd.MM.yyyy hh:mm");
-        //String parsen zu Date mit definiertem Format
-        Date startDate = newFormat.parse(String.valueOf(list[1][1]));
-        System.out.println("Startdatum: " + startDate);
-        String testDate = new String("01.12.2016 12:00");
-        Date endDate = newFormat.parse(testDate);
-        //Date endDate = newFormat.parse(String.valueOf(list[4][1]));
-        System.out.println("Enddatum: " + endDate);
+        //Calendar start = Calendar.getInstance();
+        //start.setTime(startDate);
+        //Calendar end = Calendar.getInstance();
+        //end.setTime(endDate);
+        int frequencyAnfrage = Collections.frequency(columnAnfrageDatum, startDate);
+        frequencyArray[0] = frequencyAnfrage;
+        int frequencyTermin = Collections.frequency(columnTerminvergabe, startDate);
+        frequencyArray[1] = frequencyTermin;
+        int frequencyAnmeldung = Collections.frequency(columnAnmeldungAnkunft, startDate);
+        frequencyArray[2] = frequencyAnmeldung;
+        int frequencyUntersuchung = Collections.frequency(columnUntersuchungsbeginn, startDate);
+        frequencyArray[3] = frequencyUntersuchung;
+        int frequencyBefund = Collections.frequency(columnBefund, startDate);
+        frequencyArray[4] = frequencyBefund;
+        int frequencyFreigabe = Collections.frequency(columnBefundfreigabe, startDate);
+        frequencyArray[5] = frequencyBefund;
+        System.out.println("Date: " + startDate + " " + "Frequency: " + frequencyAnfrage + " " + "Termin: " + frequencyTermin
+        + " " + "Anmeldung: " + frequencyAnmeldung + " " + "Untersuchung: " + frequencyUntersuchung + " " +
+                "Befund: " + frequencyBefund + " " + "Freigabe: " + frequencyFreigabe);
+        return frequencyArray;
+    }
 
-        //Start date und enddate im Kalender
 
-        Calendar start = Calendar.getInstance();
-        start.setTime(startDate);
-        Calendar end = Calendar.getInstance();
-        end.setTime(endDate);
-        Calendar cdate = Calendar.getInstance();
-        //getTime wandelt um in Zeit...
-        //System.out.println(start.getTime());
-        //System.out.println(end.getTime());
+    public Date getStartDate()
+    {
+        return startDate;
+    }
 
-        //Algorithmus, Rohdaten existieren versteckte Zeilen z.B. bei 30!!!!
+    public void setStartDate(Date startDate)
+    {
+        this.startDate = startDate;
+    }
 
-        int counter;
-        while (start.before(end)) {
-            counter = 0;
-            //System.out.println(start.getTime());
-            for (int i = 1; i < list.length; i++)
-            {
-                try
-                {
-                    Date date = newFormat.parse(String.valueOf(list[i][1]));
-                    cdate.setTime(date);
-                    //System.out.println(cdate.getTime());
-                    //System.out.println("Cdate: " + cdate.get(Calendar.DATE));
-                    // System.out.println("Compare: " + start.get(Calendar.DATE));
-                    if (cdate.get(Calendar.DAY_OF_YEAR) == start.get(Calendar.DAY_OF_YEAR))
-                    {
-                        //System.out.println("Date from array: " + cdate.get(Calendar.DATE) + " " + "Date advanced: " + start.get(Calendar.DATE));
-                        counter++;
-                    }
-                }
-                catch (ParseException pe)
-                {
-                    cdate.setTime(startDate);
-                }
-            }
-            System.out.println("Überprüfendes Datum: " + start.getTime() + " " + "Anzahl gleiches Datum: " + counter);
-            start.add(Calendar.DATE, 1);
-        }
+    public Date addDay()
+    {
+        Calendar c = Calendar.getInstance();
+        c.setTime(getStartDate());
+        c.add(Calendar.DATE, 1);
+        startDate = c.getTime();
+        return startDate;
     }
 }

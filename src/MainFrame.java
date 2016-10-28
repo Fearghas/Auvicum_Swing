@@ -13,9 +13,8 @@ public class MainFrame extends JPanel
     private JLabel label;
     private JLabel labelTwo;
     private boolean fileChosen = false;
-    private String [][] list;
-    private Animation circles;
-    private MainFrame mainFrame;
+    private Logic logic;
+    private PointsEx ex;
     private JButton stopButton;
     private JButton buttonDraw;
     private JButton button;
@@ -33,7 +32,6 @@ public class MainFrame extends JPanel
         //setLayout mit BoxLayout/BorderLayout/GridLayout für Standort der Panels zu organisiere
         firstPanel.setLayout(new GridLayout(0,1));
 
-
         //Eigenschaften für Panel
         label = new JLabel("Choose a *.csv file");
         labelTwo = new JLabel("Draw Image - creates a new frame");
@@ -49,19 +47,23 @@ public class MainFrame extends JPanel
         });
         buttonDraw = new JButton();
         buttonDraw.setText("Draw");
-
         buttonDraw.addActionListener(new ActionListener()
         {
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                JFrame frame = new JFrame("TimerBasedAnimation");
+                //Weiter mit Animationsklasse
+                /*JFrame frame = new JFrame("TimerBasedAnimation");
                 frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 MainFrame.this.circles = new Animation(getList());
                 frame.add(circles);
                 frame.setSize(450, 350);
                 frame.setLocationRelativeTo(null);
-                frame.setVisible(true);
+                frame.setVisible(true);*/
+
+                //Weiter mit Drawingklasse
+                ex = new PointsEx(getLogic());
+                ex.setVisible(true);
             }
         });
 
@@ -69,18 +71,20 @@ public class MainFrame extends JPanel
         stopButton.setText("Stop");
         stopButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                circles.stopTimer();
+            public void actionPerformed(ActionEvent e)
+            {
+                ex.stopTimer();
             }
         });
 
         playButton=new JButton();
         playButton.setText("Play");
-
-        playButton.addActionListener(new ActionListener() {
+        playButton.addActionListener(new ActionListener()
+        {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                circles.startTimer();
+            public void actionPerformed(ActionEvent e)
+            {
+               ex.startTimer();
             }
         });
         firstPanel.add(label);
@@ -89,8 +93,6 @@ public class MainFrame extends JPanel
         firstPanel.add(buttonDraw);
         firstPanel.add(stopButton);
         firstPanel.add(playButton);
-
-
 
         mainFrame.getContentPane().add(firstPanel);
         mainFrame.setSize(500, 500);
@@ -160,14 +162,15 @@ public class MainFrame extends JPanel
         }
     }
 
-    public String[][] getList()
+    public void setLogic(Logic logic)
     {
-        return list;
+        this.logic = logic;
     }
 
-    public void setList(String[][] list)
+    public Logic getLogic()
     {
-        this.list = list;
+
+        return logic;
     }
 
 }

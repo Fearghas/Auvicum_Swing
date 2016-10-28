@@ -1,37 +1,57 @@
 import java.io.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 
 /**
  * Created by Briareus on 28.08.2016.
  */
 public class Data
 {
-
     private String file;
     private int lineCounter;
+    private ArrayList<Date> dateList;
+    private String[][] list;
 
-
+    //Konstruktor nimmt String als Parameter auf
     public Data(String file)
     {
         this.file = file;
     }
 
     //Methode zum Anzahl Columns berechnen und liefert String[][] zurück
-    public String[][] storeContent() throws IOException
+    public Data storeContent() throws IOException
     {
         FileInputStream inputStream = new FileInputStream(file);
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
         String csvSplitBy = ";";
         String headerLine = bufferedReader.readLine();
+
+        /*
+        * erstellt String Liste
+        * header: [0] = ID
+        *         [1] = Anfrage Datum
+        */
         String[] header = headerLine.split(csvSplitBy);
-        int count = header.length;
+        int count = header.length; //zählt Elemente aus Liste = 18
         lineCounter = 1; // Headerlinie noch dazuzählen
         int indexOfHeaderElements = 0;
+
+        //zählt wie viele Anzahl Zeilen
         while (bufferedReader.readLine() != null)
         {
             lineCounter++;
         }
-        String[][] list = new String[lineCounter][count];
+
+        /*
+        * erstellt String 2d
+        * list [0][i = 0] = header[0] => list       [0] [1] [2] [3]
+        * list [0][i = 1] = header[1] =>        [0]ID   Anf etc.
+        * list [0][i = 1] = header[2] =>        [1]1
+        */
+        list = new String[lineCounter][count];
         for (int i = 0; i < count; i++)
         {
             list[indexOfHeaderElements][i] = header[i];
@@ -51,13 +71,31 @@ public class Data
             }
             y++;
         }
-        //System.out.println(array2D[7532][1]);
         bufferedReader.close();
-        return list ;
+        return this;
     }
 
     public int getLineCounter()
     {
         return lineCounter;
+    }
+
+    public ArrayList<Date> createArrayListDates(int index)
+    {
+        dateList = new ArrayList<>();
+        SimpleDateFormat newFormat = new SimpleDateFormat("dd.MM.yyyy");
+        for (int i = 0; i < list.length; i++)
+        {
+            try
+            {
+                Date date = newFormat.parse(list[i][index]);
+                dateList.add(date);
+
+            } catch (ParseException e)
+            {
+                dateList.add(null);
+            }
+        }
+        return dateList;
     }
 }
