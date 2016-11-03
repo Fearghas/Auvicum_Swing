@@ -5,24 +5,21 @@ import processing.core.PApplet;
  */
 public class ProcessingPanel extends PApplet
 {
-    private ProcessingFrame proccessingFrame;
     int radius = getRadius();
-    int x = getX();
-    int y = getY();
 
     public void setup()
    {
-       background(255);
+
    }
 
-
-
-   public void draw()
+   public void draw() //Default sind 60 Hz wenn ohne "noLoop()"
    {
+       background(51);
        stroke(0);
        fill(255, 0, 255);
-       ellipse(50, 50, radius, radius);
-
+       //System.out.println(radius);
+       ellipse(getWidth()/2, getHeight()/2, radius, radius);
+       noLoop();
    }
 
     public int getRadius()
@@ -34,23 +31,7 @@ public class ProcessingPanel extends PApplet
     {
         this.radius = radius;
     }
-
-    @Override
-    public int getX() {
-        return x;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    @Override
-    public int getY() {
-        return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
 }
+
+
 

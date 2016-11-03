@@ -1,6 +1,8 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 /**
  * Created by Briareus on 31.10.2016.
@@ -8,7 +10,7 @@ import java.awt.event.ActionListener;
 public class ProcessingFrame extends JFrame implements ActionListener
 {
     private ProcessingPanel processingPanel;
-    private final int DELAY = 2000;//milliseconds
+    private final int DELAY = 500;//milliseconds
     private Timer timer;
     private int radius1 = 30;//Magic number 10 für das erste Mal zeichnen, dann abhängig von Logic
     private int radius2 = 30;
@@ -19,6 +21,8 @@ public class ProcessingFrame extends JFrame implements ActionListener
     private Logic logic;
     private Integer[] frequency;
     private int addToRadius1= 0;
+    private int x = 50;
+    private int y = 50;
     //String date;
 
     public ProcessingFrame(Logic logic)
@@ -31,12 +35,23 @@ public class ProcessingFrame extends JFrame implements ActionListener
         processingPanel.init();//aus Processing-Klasse in "Java Component" umwandeln...
         add(processingPanel);
         initTimer();
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+               timer.stop();
+            }
+        });
     }
 
-    private void initTimer() {
+    private void initTimer()
+    {
 
         timer = new Timer(DELAY, this);
         timer.start();// heisst das =>start/delay-actionPerformed wird ausgeführt-delay-actionPerformed wird ausgeführt
+    }
+
+    public Timer getTimer() {
+        return timer;
     }
 
     @Override
@@ -70,8 +85,11 @@ public class ProcessingFrame extends JFrame implements ActionListener
         }
         //System.out.println("Radius to draw: " + radius1);
         processingPanel.setRadius(radius1+addToRadius1);
-
-        System.out.println(radius1);
+        processingPanel.redraw();
+        //x = (int) (Math.random()*100);
+        //y = (int) (Math.random()*100);
+        //processingPanel.setX(x);
+        //processingPanel.setY(y);
         logic.addDay();
         //repaint();
 
