@@ -1,10 +1,16 @@
+import processing.core.PApplet;
+
+import java.io.IOException;
+import java.text.ParseException;
+
 /**
  * Created by Andreas on 15.06.2016.
  */
 
 public class Auvicum
 {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws Exception
+    {
         MainFrame mainFrame = new MainFrame();
         mainFrame.createMainFrame();
         mainFrame.waitingForUser(); //Barriere => warten bis File ausgesucht wurde, dann gehts weiter mit Anweisungen unten
