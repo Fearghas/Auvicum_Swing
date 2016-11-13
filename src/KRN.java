@@ -43,7 +43,6 @@ public class KRN extends PApplet
         public void setup()
         {
             size (x, y);
-
             image = loadImage("Logo.gif");
             imageKRN = loadImage("KRN.gif");
             dynamicAreaWidth = width*zweiDrittel;
@@ -92,14 +91,14 @@ public class KRN extends PApplet
         public void draw()
         {
             //System.out.println(width + " " + height);
-           /*
+
             background(96, 96, 96);
             image(image, 300, 200);
-            if (millis() > 3000)
+            if (millis() > 2500)
             {
                 image(imageKRN, 200, 50);
             }
-            */
+            if (millis() > 5000){
                 background(96, 96, 96);
                 //text("x: " + mouseX + " y: " + mouseY, 10, 15); //Um Koordinaten anzuzeigen
                 noStroke();
@@ -202,7 +201,7 @@ public class KRN extends PApplet
             fill(0);
             textAlign(2);
             text(date, dynamicAreaWidth, boarderHeight);
-        }
+        }}
 
     public float getxBasePoint()
     {

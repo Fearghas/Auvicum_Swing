@@ -33,7 +33,7 @@ public class Logic
         columnBefund = data.createArrayListDates(13);
         columnBefundfreigabe = data.createArrayListDates(17);
         newFormat = new SimpleDateFormat("dd.MM.yyyy");
-        startDate = newFormat.parse(new String("10.12.2014"));
+        startDate = newFormat.parse(new String("01.10.2015"));
         frequencyArray = new Integer[7];
         //Date startDate = newFormat.parse(String.valueOf(list[1][1]));
         //String testDate = new String("31.12.2016");

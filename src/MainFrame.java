@@ -37,8 +37,8 @@ public class MainFrame extends JPanel
         firstPanel.setLayout(new GridLayout(0,1));
 
         //Eigenschaften für Panel
-        label = new JLabel("Choose CSV file: ", JLabel.CENTER);
-        labelTwo = new JLabel("Draw content", JLabel.CENTER);
+        label = new JLabel("Choose CSV File: ", JLabel.CENTER);
+        //labelTwo = new JLabel("Nothing to draw", JLabel.CENTER);
         button = new JButton();
         button.setText("Browse");
         button.addActionListener(new ActionListener()
@@ -50,7 +50,8 @@ public class MainFrame extends JPanel
             }
         });
         buttonDraw = new JButton();
-        buttonDraw.setText("Draw");
+        buttonDraw.setForeground(Color.RED);
+        buttonDraw.setText("Nothing To Draw");
         buttonDraw.addActionListener(new ActionListener()
         {
             @Override
@@ -77,7 +78,7 @@ public class MainFrame extends JPanel
         });
 
         stopButton = new JButton();
-        stopButton.setText("Stop");
+        stopButton.setText("Pause");
         stopButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e)
@@ -100,7 +101,7 @@ public class MainFrame extends JPanel
         });
         firstPanel.add(label);
         firstPanel.add(button);
-        firstPanel.add(labelTwo);
+        //firstPanel.add(labelTwo);
         firstPanel.add(buttonDraw);
         firstPanel.add(stopButton);
         firstPanel.add(playButton);
@@ -117,7 +118,7 @@ public class MainFrame extends JPanel
     //alle Methoden dieser Klasse
     private void getPath() {
         //JFileChooser erstellen in dem nur *.csv angezeigt wird
-        JFileChooser chooser = new JFileChooser("C:\\Users\\Andreas\\IdeaProjects\\Auvicum_Swing\\src");
+        JFileChooser chooser = new JFileChooser("c://auvicum");
         FileNameExtensionFilter filter = new FileNameExtensionFilter("*.csv", "csv");
         chooser.setFileFilter(filter);
         int returnValue = chooser.showOpenDialog(null);
@@ -127,13 +128,18 @@ public class MainFrame extends JPanel
             // use file
             csvFile = chooser.getSelectedFile().getPath();
             inputFromUser(); //Main mitteilen, dass Input gekommen ist und weitermachen kann mit Anweisung
-            label.setForeground(Color.GREEN);
-            label.setText("Valid file chosen!");
+            label.setForeground(Color.BLACK);
+            label.setText("Valid File Chosen!");
+            buttonDraw.setForeground(Color.GREEN);
+            buttonDraw.setText("Draw Content");
+
         }
+        /*
         else
         {
             label.setText("Choose CSV File");
         }
+        */
     }
 
     public String setCsvFile(String csvFile)
