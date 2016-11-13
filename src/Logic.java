@@ -13,6 +13,7 @@ public class Logic
     private Data data;
     private Integer[] frequencyArray;
     private ArrayList<Date> columnAnfrageDatum;
+    private ArrayList<Date> columnAnfrageEreignisDatum;
     private ArrayList<Date> columnTerminvergabe;
     private ArrayList<Date> columnAnmeldungAnkunft;
     private ArrayList<Date> columnUntersuchungsbeginn;
@@ -25,14 +26,15 @@ public class Logic
     {
         this.data = data;
         columnAnfrageDatum = data.createArrayListDates(1);
+        columnAnfrageEreignisDatum = data.createArrayListDates(2);
         columnTerminvergabe = data.createArrayListDates(9);
         columnAnmeldungAnkunft = data.createArrayListDates(8);
         columnUntersuchungsbeginn = data.createArrayListDates(10);
         columnBefund = data.createArrayListDates(13);
         columnBefundfreigabe = data.createArrayListDates(17);
         newFormat = new SimpleDateFormat("dd.MM.yyyy");
-        startDate = newFormat.parse(new String("01.12.2015"));
-        frequencyArray = new Integer[6];
+        startDate = newFormat.parse(new String("10.12.2014"));
+        frequencyArray = new Integer[7];
         //Date startDate = newFormat.parse(String.valueOf(list[1][1]));
         //String testDate = new String("31.12.2016");
         //Date endDate = newFormat.parse(testDate);
@@ -47,19 +49,23 @@ public class Logic
         //end.setTime(endDate);
         int frequencyAnfrage = Collections.frequency(columnAnfrageDatum, startDate);
         frequencyArray[0] = frequencyAnfrage;
+        int frequencyAnfrageEreignisDatum = Collections.frequency(columnAnfrageEreignisDatum, startDate);
+        frequencyArray[1] = frequencyAnfrageEreignisDatum;
         int frequencyTermin = Collections.frequency(columnTerminvergabe, startDate);
-        frequencyArray[1] = frequencyTermin;
+        frequencyArray[2] = frequencyTermin;
         int frequencyAnmeldung = Collections.frequency(columnAnmeldungAnkunft, startDate);
-        frequencyArray[2] = frequencyAnmeldung;
+        frequencyArray[3] = frequencyAnmeldung;
         int frequencyUntersuchung = Collections.frequency(columnUntersuchungsbeginn, startDate);
-        frequencyArray[3] = frequencyUntersuchung;
+        frequencyArray[4] = frequencyUntersuchung;
         int frequencyBefund = Collections.frequency(columnBefund, startDate);
-        frequencyArray[4] = frequencyBefund;
-        int frequencyFreigabe = Collections.frequency(columnBefundfreigabe, startDate);
         frequencyArray[5] = frequencyBefund;
-        System.out.println("Date: " + startDate + " " + "Frequency: " + frequencyAnfrage + " " + "Termin: " + frequencyTermin
-        + " " + "Anmeldung: " + frequencyAnmeldung + " " + "Untersuchung: " + frequencyUntersuchung + " " +
-                "Befund: " + frequencyBefund + " " + "Freigabe: " + frequencyFreigabe);
+        int frequencyBefundFreigabe = Collections.frequency(columnBefundfreigabe, startDate);
+        frequencyArray[6] = frequencyBefund;
+        System.out.println(
+                "Date: " + startDate + " " + "Anfrage KIS " + frequencyAnfrage + " " + "AnfrageEreignis: "
+                        + frequencyAnfrageEreignisDatum + " " + "Termin: " + frequencyTermin + " "
+                        + "Anmeldung: " + frequencyAnmeldung + " " + "Untersuchung: " + frequencyUntersuchung + " " +
+                "Befund: " + frequencyBefund + " " + "Freigabe: " + frequencyBefundFreigabe);
         return frequencyArray;
     }
 
