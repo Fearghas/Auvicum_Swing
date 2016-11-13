@@ -1,3 +1,5 @@
+import processing.core.PApplet;
+
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
@@ -15,6 +17,8 @@ public class MainFrame extends JPanel
     private boolean fileChosen = false;
     private Logic logic;
     private PointsEx ex;
+    private ProcessingFrame processingFrame;
+    private Timer timer;
     private JButton stopButton;
     private JButton buttonDraw;
     private JButton button;
@@ -33,8 +37,8 @@ public class MainFrame extends JPanel
         firstPanel.setLayout(new GridLayout(0,1));
 
         //Eigenschaften für Panel
-        label = new JLabel("Choose a *.csv file");
-        labelTwo = new JLabel("Draw Image - creates a new frame");
+        label = new JLabel("Choose CSV file: ", JLabel.CENTER);
+        labelTwo = new JLabel("Draw content", JLabel.CENTER);
         button = new JButton();
         button.setText("Browse");
         button.addActionListener(new ActionListener()
@@ -52,18 +56,23 @@ public class MainFrame extends JPanel
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                //Weiter mit Animationsklasse
-                /*JFrame frame = new JFrame("TimerBasedAnimation");
-                frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                MainFrame.this.circles = new Animation(getList());
-                frame.add(circles);
-                frame.setSize(450, 350);
-                frame.setLocationRelativeTo(null);
-                frame.setVisible(true);*/
-
                 //Weiter mit Drawingklasse
-                ex = new PointsEx(getLogic());
-                ex.setVisible(true);
+                /*ex = new PointsEx(getLogic());
+                ex.setVisible(true);*/
+
+                //Weiter mit Processing
+                /*
+                ProcessingFrame processingFrame = new ProcessingFrame(getLogic());
+                processingFrame.setSize(1000, 600);
+                processingFrame.setVisible(true);
+                timer = processingFrame.getTimer();
+                */
+
+                //Weiter mit KRN
+
+                ProcessingFrameKRN processingFrameKRN = new ProcessingFrameKRN(getLogic());
+                timer = processingFrameKRN.getTimer();
+
             }
         });
 
@@ -73,7 +82,8 @@ public class MainFrame extends JPanel
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                ex.stopTimer();
+                //ex.stopTimer();
+                timer.stop();
             }
         });
 
@@ -84,7 +94,8 @@ public class MainFrame extends JPanel
             @Override
             public void actionPerformed(ActionEvent e)
             {
-               ex.startTimer();
+               //ex.startTimer();
+                timer.start();
             }
         });
         firstPanel.add(label);
@@ -93,6 +104,7 @@ public class MainFrame extends JPanel
         firstPanel.add(buttonDraw);
         firstPanel.add(stopButton);
         firstPanel.add(playButton);
+        firstPanel.setBackground(Color.WHITE);
 
         mainFrame.getContentPane().add(firstPanel);
         mainFrame.setSize(500, 500);
@@ -115,11 +127,12 @@ public class MainFrame extends JPanel
             // use file
             csvFile = chooser.getSelectedFile().getPath();
             inputFromUser(); //Main mitteilen, dass Input gekommen ist und weitermachen kann mit Anweisung
-            label.setText("Valid file chosen");
+            label.setForeground(Color.GREEN);
+            label.setText("Valid file chosen!");
         }
         else
         {
-            label.setText("Choose a *.csv file");
+            label.setText("Choose CSV File");
         }
     }
 
