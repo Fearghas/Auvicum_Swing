@@ -1,7 +1,7 @@
 <application>
   <component name="FindSettings">
-    <option name="customScope" value="File 'C:\Users\Briareus\IdeaProjects\Projekt-Programmieren-II\src\main\java\project\drawing\MainPanel.java'" />
-    <option name="defaultScopeName" value="File 'C:\Users\Briareus\IdeaProjects\Projekt-Programmieren-II\src\main\java\project\drawing\MainPanel.java'" />
-    <option name="SEARCH_SCOPE" value="File 'C:\Users\Briareus\IdeaProjects\Projekt-Programmieren-II\src\main\java\project\drawing\MainPanel.java'" />
+    <option name="customScope" value="Project 'Sliceview'" />
+    <option name="defaultScopeName" value="Project 'Sliceview'" />
+    <option name="SEARCH_SCOPE" value="Project 'Sliceview'" />
   </component>
 </application>
