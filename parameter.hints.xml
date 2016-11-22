@@ -1,0 +1,9 @@
+<application>
+  <component name="ParameterNameHintsSettings">
+    <blacklists>
+      <blacklist language="Java">
+        <added pattern="ch.fhnw.ima.sliceview.present.image.ImageView.Controller.Controller(imageView)" />
+      </blacklist>
+    </blacklists>
+  </component>
+</application>
