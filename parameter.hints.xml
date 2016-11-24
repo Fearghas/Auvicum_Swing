@@ -7,6 +7,7 @@
         <added pattern="ch.fhnw.ima.sliceview.present.image.Controller.Controller(imageView,applicationContext)" />
         <added pattern="ch.fhnw.ima.sliceview.present.image.ImageViewController.ImageViewController(imageView,applicationContext)" />
         <added pattern="ch.fhnw.ima.sliceview.present.image.MouseMovedController.MouseMovedController(imageView,applicationContext)" />
+        <added pattern="ch.fhnw.ima.sliceview.present.image.Controller.Controller(applicationContext,imageView)" />
       </blacklist>
     </blacklists>
   </component>
