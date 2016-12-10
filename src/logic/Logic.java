@@ -1,3 +1,7 @@
+package logic;
+
+import persist.FileLoader;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -10,7 +14,7 @@ import java.util.Date;
  */
 public class Logic
 {
-    private Data data;
+    private FileLoader fileLoader;
     private Integer[] frequencyArray;
     private ArrayList<Date> columnAnfrageDatum;
     private ArrayList<Date> columnAnfrageEreignisDatum;
@@ -22,16 +26,16 @@ public class Logic
     private SimpleDateFormat newFormat;
     private Date startDate;
 
-    public Logic(Data data) throws ParseException
+    public Logic(FileLoader fileLoader) throws ParseException
     {
-        this.data = data;
-        columnAnfrageDatum = data.createArrayListDates(1);
-        columnAnfrageEreignisDatum = data.createArrayListDates(2);
-        columnTerminvergabe = data.createArrayListDates(9);
-        columnAnmeldungAnkunft = data.createArrayListDates(8);
-        columnUntersuchungsbeginn = data.createArrayListDates(10);
-        columnBefund = data.createArrayListDates(13);
-        columnBefundfreigabe = data.createArrayListDates(17);
+        this.fileLoader = fileLoader;
+        columnAnfrageDatum = fileLoader.createArrayListDates(1);
+        columnAnfrageEreignisDatum = fileLoader.createArrayListDates(2);
+        columnTerminvergabe = fileLoader.createArrayListDates(9);
+        columnAnmeldungAnkunft = fileLoader.createArrayListDates(8);
+        columnUntersuchungsbeginn = fileLoader.createArrayListDates(10);
+        columnBefund = fileLoader.createArrayListDates(13);
+        columnBefundfreigabe = fileLoader.createArrayListDates(17);
         newFormat = new SimpleDateFormat("dd.MM.yyyy");
         startDate = newFormat.parse(new String("01.10.2015"));
         frequencyArray = new Integer[7];

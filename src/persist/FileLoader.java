@@ -1,14 +1,15 @@
+package persist;
+
 import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 
 /**
  * Created by Briareus on 28.08.2016.
  */
-public class Data
+public class FileLoader
 {
     private String file;
     private int lineCounter;
@@ -16,13 +17,13 @@ public class Data
     private String[][] list;
 
     //Konstruktor nimmt String als Parameter auf
-    public Data(String file)
+    public FileLoader(String file)
     {
         this.file = file;
     }
 
     //Methode zum Anzahl Columns berechnen und liefert String[][] zurück
-    public Data storeContent() throws IOException
+    public FileLoader storeContent() throws IOException
     {
         FileInputStream inputStream = new FileInputStream(file);
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));

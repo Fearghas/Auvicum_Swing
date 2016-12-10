@@ -1,13 +1,13 @@
+package present.image;
+
 import processing.core.PApplet;
 import processing.core.PImage;
-
-import java.util.Date;
 
 
 /**
  * Created by Briareus on 02.11.2016.
  */
-public class KRN extends PApplet
+public class ProcessingView extends PApplet
 {
 
 
@@ -43,8 +43,8 @@ public class KRN extends PApplet
         public void setup()
         {
             size (x, y);
-            image = loadImage("Logo.gif");
-            imageKRN = loadImage("KRN.gif");
+            image = loadImage("present/image/Logo.gif");
+            imageKRN = loadImage("present/image/KRN.gif");
             dynamicAreaWidth = width*zweiDrittel;
             boarderWidth = (float) (0.05*width);
             boarderHeight =(float) (0.05*height);
@@ -119,7 +119,16 @@ public class KRN extends PApplet
                 noFill();
                 stroke(255, 0, 0);
                 strokeWeight(strokeAnfrageEreignis);
-                arc(dynamicAreaWidth / 2, height / 2, 2 * radius, 2 * radius, PI + HALF_PI, TWO_PI - ((PI / 180) * 20));//Endpunkt minus 20 Grad in radians
+                frameRate(10);
+                float x = basePoints[4][0];
+                float y = basePoints[4][1];
+                for (int i = 0; i < strokeAnfrageEreignis; i++)
+                {
+                   ellipse(x, y, 25, 25);//Kreis rechts oben: RIS
+                    x = x + i;
+                    y = y + i;
+                }
+                //arc(dynamicAreaWidth / 2, height / 2, 2 * radius, 2 * radius, PI + HALF_PI, TWO_PI - ((PI / 180) * 20));//Endpunkt minus 20 Grad in radians
 
             //Kurve: Start Planung, Ende Ankunft
                 noFill();
@@ -140,6 +149,7 @@ public class KRN extends PApplet
                 arc(dynamicAreaWidth / 2, height / 2, 2 * radius, 2 * radius, (PI / 180) * 20, HALF_PI);
 
             //Linie: Start Anfrage KIS, Ende RIS
+                noFill();
                 stroke(0, 102, 0);
                 strokeWeight(strokeAnfrage);
                 line((dynamicAreaWidth / 2) + (radius / 2), height / 2, basePoints[4][0], basePoints[4][1]);

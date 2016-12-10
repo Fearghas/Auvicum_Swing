@@ -1,3 +1,7 @@
+package present.image;
+
+import logic.Logic;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,9 +12,9 @@ import java.util.Date;
 /**
  * Created by Briareus on 13.11.2016.
  */
-public class ProcessingFrameKRN extends JFrame implements ActionListener
+public class ProcessingPanel extends JFrame implements ActionListener
 {
-    private KRN krnPanel;
+    private ProcessingView processingViewPanel;
     private Logic logic;
     private final int DELAY = 500;//milliseconds
     private Timer timer;
@@ -24,12 +28,12 @@ public class ProcessingFrameKRN extends JFrame implements ActionListener
     private int addToBefundFreigabe = 0;
     private Date date;
 
-    public ProcessingFrameKRN(Logic logic)
+    public ProcessingPanel(Logic logic)
     {
         this.logic = logic;
-        krnPanel = new KRN();
-        krnPanel.init();//aus Processing-Klasse in "Java Component" umwandeln...
-        add(krnPanel);
+        processingViewPanel = new ProcessingView();
+        processingViewPanel.init();//aus Processing-Klasse in "Java Component" umwandeln...
+        add(processingViewPanel);
         setTitle("Processing");
         setSize(1006, 629);//nicht flexibel angepasst auf size von : 1000x600
         setLocationRelativeTo(null);
@@ -61,7 +65,7 @@ public class ProcessingFrameKRN extends JFrame implements ActionListener
     {
         date = logic.getStartDate();
         String stringDate = String.valueOf(date);
-        krnPanel.setDate(stringDate);
+        processingViewPanel.setDate(stringDate);
         frequency = logic.countFrequency();
         addToAnfrage = frequency[0];
         addToAnfrageEreignis = frequency[1];
@@ -84,25 +88,25 @@ public class ProcessingFrameKRN extends JFrame implements ActionListener
                 //addToBefund = 100;
                 addToBefundFreigabe = 100;
             }
-            krnPanel.setStrokeAnfrage(1 + addToAnfrage);
-            krnPanel.setStrokeAnfrageEreignis(1 + addToAnfrageEreignis);
-            krnPanel.setStrokeTermin(1 + addToTermin);
-            krnPanel.setStrokeAnkunft(1 + addToAnkunft);
-            krnPanel.setStrokeUntersuchung(1 + addToUntersuchung);
-            //krnPanel.setStrokeBefund(1 + addToBefund);
-            krnPanel.setGetStrokeBefundFreigabe(1 + addToBefundFreigabe);
+            processingViewPanel.setStrokeAnfrage(1 + addToAnfrage);
+            processingViewPanel.setStrokeAnfrageEreignis(1 + addToAnfrageEreignis);
+            processingViewPanel.setStrokeTermin(1 + addToTermin);
+            processingViewPanel.setStrokeAnkunft(1 + addToAnkunft);
+            processingViewPanel.setStrokeUntersuchung(1 + addToUntersuchung);
+            //processingViewPanel.setStrokeBefund(1 + addToBefund);
+            processingViewPanel.setGetStrokeBefundFreigabe(1 + addToBefundFreigabe);
         }
         else
         {
-            krnPanel.setStrokeAnfrage(0);
-            krnPanel.setStrokeAnfrageEreignis(0);
-            krnPanel.setStrokeTermin(0);
-            krnPanel.setStrokeAnkunft(0);
-            krnPanel.setStrokeUntersuchung(0);
-            //krnPanel.setStrokeBefund(1);
-            krnPanel.setGetStrokeBefundFreigabe(0);
+            processingViewPanel.setStrokeAnfrage(0);
+            processingViewPanel.setStrokeAnfrageEreignis(0);
+            processingViewPanel.setStrokeTermin(0);
+            processingViewPanel.setStrokeAnkunft(0);
+            processingViewPanel.setStrokeUntersuchung(0);
+            //processingViewPanel.setStrokeBefund(1);
+            processingViewPanel.setGetStrokeBefundFreigabe(0);
         }
-        krnPanel.redraw();
+        processingViewPanel.redraw();
         logic.addDay();
     }
 }
