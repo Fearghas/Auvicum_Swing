@@ -1,0 +1,14 @@
+<application>
+  <component name="ParameterNameHintsSettings">
+    <blacklists>
+      <blacklist language="Java">
+        <added pattern="ch.fhnw.ima.sliceview.present.image.ImageView.Controller.Controller(imageView)" />
+        <added pattern="javafx.scene.canvas.GraphicsContext.fillRect(x,y,w,h)" />
+        <added pattern="ch.fhnw.ima.sliceview.present.image.Controller.Controller(imageView,applicationContext)" />
+        <added pattern="ch.fhnw.ima.sliceview.present.image.ImageViewController.ImageViewController(imageView,applicationContext)" />
+        <added pattern="ch.fhnw.ima.sliceview.present.image.MouseMovedController.MouseMovedController(imageView,applicationContext)" />
+        <added pattern="ch.fhnw.ima.sliceview.present.image.Controller.Controller(applicationContext,imageView)" />
+      </blacklist>
+    </blacklists>
+  </component>
+</application>
