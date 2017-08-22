@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Auvicum_Swing:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Auvicum_Swing_jar</output-path>
+    <root id="archive" name="Auvicum_Swing.jar">
+      <element id="module-output" name="Auvicum_JavaFX" />
+    </root>
+  </artifact>
+</component>
